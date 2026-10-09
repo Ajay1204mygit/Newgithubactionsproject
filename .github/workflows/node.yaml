@@ -15,10 +15,13 @@ jobs:
      with:
       node-version: '24'
    - name: Install packages
-     run: npm install
+     run: |
+      npm install
+      npm dotenv
+      npm express
    - name: Run application
      run: |
-      npm server1.js &
+      npm server.js &
       sleep 5
       curl http://localhost:8080
       curl http://localhost:8080/health
