@@ -17,8 +17,6 @@ jobs:
    - name: Install packages
      run: |
       npm install
-      npm install dotenv
-      npm install express
    - name: Run application
      run: |
       npm server.js &
