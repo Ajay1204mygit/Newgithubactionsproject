@@ -7,6 +7,6 @@ jobs:
   basic:
     runs-on: ["wsl-linux"]
   steps:
-    -name : print a statement
-     run : echo "Basic GHA pipeline"
+   - name: print a statement
+     run: echo "Basic GHA pipeline"
     
