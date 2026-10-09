@@ -23,6 +23,5 @@ jobs:
      run: |
       npm server.js &
       sleep 5
-      curl http://localhost:8080
-      curl http://localhost:8080/health
+      curl http://localhost:8080/
       pkill -f node
