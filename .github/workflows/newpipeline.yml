@@ -3,10 +3,11 @@ name: Basic GHA pipepline
 on:
   push:
     branches: ["main"]
+    
 jobs:
   basic:
     runs-on: ["wsl-linux"]
-  steps:
-   - name: print a statement
-     run: echo "Basic GHA pipeline"
+    steps:
+     - name: print a statement
+       run: echo "Basic GHA pipeline"
     
