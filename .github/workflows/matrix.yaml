@@ -1,4 +1,4 @@
-name: node pipeline
+name: matrix pipeline
 
 on:
  push:
