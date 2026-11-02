@@ -1,13 +1,14 @@
 const express = require('express');
 const dotenv = require('dotenv');
 
-const env = process.argv[2] || 'development';
+const env = process.argv[2] || "development";
 dotenv.config({path :`.env.${env}`});
 
 function log(message){
         const time = new Date().toISOString();
         console.log(`[${time}] [${env.toUpperCase}] ${message}`);
 }
+
 const app = express();
 
 const PORT = process.env.PORT;
@@ -20,9 +21,10 @@ app.get('/',(req, res) =>{
 app.get('/health', (req, res) => {
         log("health check called");
         res.status(100).json({
-                Status :"Working"
-        });
+                Status :"up"
+    });
 });
-app.listen(PORT,()=>{
+
+app.listen(PORT , () => {
         log("server is running in port id:"+PORT);
 });
