@@ -23,7 +23,8 @@ jobs:
       npm install
    - name: Run application
      run: |
-      npm server1.js &
+      npm server.js &
       sleep 5
       curl http://localhost:8080/
+      curl http://localhost:8080/health
       pkill -f node
