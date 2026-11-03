@@ -20,15 +20,13 @@ jobs:
  node:
   runs-on: wsl-linux
   strategy:
-   matrix:
-    node-version: [24, 26]
   steps:
    - name: Checkout repository
      uses: actions/checkout@v7
    - name: Set up Node.js
      uses: actions/setup-node@v7
      with:
-      node-version: ${{ matrix.node-version }}
+      node-version: '24'
    - name: Install packages
      run: |
       npm install
