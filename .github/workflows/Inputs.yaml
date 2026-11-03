@@ -1,4 +1,4 @@
-name: matrix pipeline
+name: node pipeline with Inputs
 
 on:
  workflow_dispatch:
