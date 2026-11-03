@@ -4,7 +4,7 @@ on:
  workflow_dispatch:
   inputs:
    environment:
-    description: selecct the environment
+    description: select the environment
     required: true
     default: development
     type: choice
@@ -17,22 +17,21 @@ on:
     default: '8080'
 
 jobs:
- node:
-  runs-on: wsl-linux
-  strategy:
-  steps:
-   - name: Checkout repository
-     uses: actions/checkout@v7
-   - name: Set up Node.js
-     uses: actions/setup-node@v7
-     with:
-      node-version: '24'
-   - name: Install packages
-     run: |
-      npm install
-   - name: Run application
-     run: |
-      node server.js ${{github.event.inputs.environment}} &
-      sleep 5
-      curl http://localhost:${{github.event.inputs.Port}}
-      pkill -f node
+  node:
+    runs-on: wsl-linux
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+      - name: Install packages
+        run: |
+          npm install
+      - name: Run application
+        run: |
+          node server.js ${{github.event.inputs.environment}} &
+          sleep 5
+          curl http://localhost:${{github.event.inputs.Port}}
+          pkill -f node
