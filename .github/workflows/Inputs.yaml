@@ -10,7 +10,7 @@ on:
     type: choice
     options:
       - development
-      - prod  
+      - production 
    Port:
     description: select the port
     required: true
