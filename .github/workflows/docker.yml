@@ -26,5 +26,5 @@ jobs:
          docker tag distroless  ${{ vars.DOCKERHUB_USERNAME }}/nodejs:$SHA
 
       - name : Push to Docker HUB
-        run: docker push  ${{ vars.DOCKERHUB_USERNAME }}/nodejs:$SHA
+        run: docker push ${{ vars.DOCKERHUB_USERNAME }}/nodejs:$SHA
         
