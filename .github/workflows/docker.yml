@@ -21,7 +21,7 @@ jobs:
 
       - name: Tag docker image
         run: |
-         SHA=${GITHUB_SHA::7}
+         SHA="${GITHUB_SHA::7}"
          echo "SHA=${GITHUB_SHA::7}" >> "$GITHUB.ENV"
          docker tag distroless  ${{ vars.DOCKERHUB_USERNAME }}/nodejs:$SHA
 
