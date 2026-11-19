@@ -23,23 +23,23 @@ jobs:
          -Dsonar.token=${{ secrets.SONAR_TOKEN1 }}
  docker:
   runs-on: ["wsl-linux"]
-   steps:
-      - name: checkoutcode
-        uses: actions/checkout@v4
-      - name: Login to Docker Hub
-        uses: docker/login-action@v4
-        with:
-          username: ${{ vars.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build docker image
-        run: docker build -f Dockerfile.destroless -t distroless .
+  steps:
+   - name: checkoutcode
+     uses: actions/checkout@v4
+   - name: Login to Docker Hub
+     uses: docker/login-action@v4
+     with:
+        username: ${{ vars.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+   - name: Build docker image
+     run: docker build -f Dockerfile.destroless -t distroless .
 
-      - name: Tag docker image
-        run: |
+   - name: Tag docker image
+     run: |
          SHA="${GITHUB_SHA::7}"
          echo "SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
          docker tag distroless  ${{ vars.DOCKERHUB_USERNAME }}/nodejs:$SHA
 
-      - name : Push to Docker HUB
-        run: docker push ${{ vars.DOCKERHUB_USERNAME }}/nodejs:$SHA
+   - name : Push to Docker HUB
+     run: docker push ${{ vars.DOCKERHUB_USERNAME }}/nodejs:$SHA
         
