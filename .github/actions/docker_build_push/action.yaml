@@ -23,7 +23,7 @@ runs:
        password: ${{ inputs.password }}
   - name: Build docker image
     shell: bash
-    run: docker build -f dockerfilename -t dockerimage .
+    run: docker build -f ${{ inputs.dockerfilename }} -t dockerimage .
 
   - name: Tag docker image
     shell: bash
