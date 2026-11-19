@@ -13,7 +13,7 @@ inputs:
   dockerhubrepo:
    description: Docker Hub Repo name
    required: true
- runs:
+runs:
   using: composite
 
 steps:
@@ -31,10 +31,10 @@ steps:
      run: |
          SHA="${GITHUB_SHA::7}"
          echo "SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
-         docker tag dockerimage  ${{ inputs.username }}/${{ inputs.dockerhubreponame }}:$SHA
+         docker tag dockerimage  ${{ inputs.username }}/${{ inputs.dockerhubrepo }}:$SHA
 
    - name : Push to Docker HUB
      shell: bash
-     run: docker push ${{ inputs.username }}/${{ inputs.dockerhubreponame }}:$SHA
+     run: docker push ${{ inputs.username }}/${{ inputs.dockerhubrepo }}:$SHA
  
   
