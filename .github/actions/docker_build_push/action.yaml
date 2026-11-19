@@ -1,0 +1,40 @@
+name: Docker build and Push
+
+inputs:
+  username:
+   description: Docker Hub username
+   required: true
+  password:
+   description: Docker hub password
+   required: true
+  dockerfilename:
+   description: Docker file name
+   required: true
+  dockerhubrepo:
+   description: Docker Hub Repo name
+   required: true
+
+runs:
+ using: composite
+
+steps:
+   - name: checkoutcode
+     uses: actions/checkout@v4
+   - name: Login to Docker Hub
+     uses: docker/login-action@v4
+     with:
+          username: ${{ inputs.username }}
+          password: ${{ inputs.password }}
+   - name: Build docker image
+     run: docker build -f dockerfilename -t dockerimage .
+
+   - name: Tag docker image
+     run: |
+         SHA="${GITHUB_SHA::7}"
+         echo "SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
+         docker tag dockerimage  ${{ inputs.username }}/${{ inputs.dockerhubreponame }}:$SHA
+
+   - name : Push to Docker HUB
+     run: docker push ${{ vars.DOCKERHUB_USERNAME }}/${{ inputs.dockerhubreponame }}:$SHA
+ 
+  
