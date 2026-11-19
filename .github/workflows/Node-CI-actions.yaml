@@ -1,0 +1,38 @@
+name: Nodeapp CI actions Pipeline
+
+on:
+ push:
+  branches: ["main"]
+ pull_request: 
+  branches: ["main"]
+ workflow_dispatch:
+
+jobs:
+ sonar:
+  runs-on: ["wsl-linux"]
+  if: github.event_name == 'pull_request'
+  steps:
+   - name: checkoutcode
+     uses: actions/checkout@v4
+   - name: SonarQube Scan
+     uses: sonarsource/sonarqube-scan-action@v8
+     with:
+       args: >
+         -Dsonar.projectKey=Nodeapp 
+         -Dsonar.sources=. 
+         -Dsonar.host.url=${{  vars.SONAR_HOST_URL }}
+         -Dsonar.token=${{ secrets.SONAR_TOKEN1 }}
+ docker:
+  runs-on: ["wsl-linux"]
+  if: github.event_name == 'push' || github.event_name =='workflow_dispatch'
+  steps:
+   - name: checkoutcode
+     uses: actions/checkout@v4
+   - name: docker build and push
+     uses: Ajay1204mygit/Newgithubactionsproject/.github/actions/docker_build_push@main
+     with:
+      username: ${{ vars.DOCKERHUB_USERNAME }}
+      password: ${{ secrets.DOCKERHUB_TOKEN }}
+      dockerfilename: Dockerfile.destroless
+      dockerhubrepo: nodejs
+        
