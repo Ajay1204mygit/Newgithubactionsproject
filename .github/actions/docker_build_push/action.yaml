@@ -13,9 +13,8 @@ inputs:
   dockerhubrepo:
    description: Docker Hub Repo name
    required: true
-
-runs:
- using: composite
+ runs:
+  using: composite
 
 steps:
    - name: Login to Docker Hub
