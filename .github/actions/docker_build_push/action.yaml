@@ -26,15 +26,18 @@ steps:
           username: ${{ inputs.username }}
           password: ${{ inputs.password }}
    - name: Build docker image
+     shell: bash
      run: docker build -f dockerfilename -t dockerimage .
 
    - name: Tag docker image
+     shell: bash
      run: |
          SHA="${GITHUB_SHA::7}"
          echo "SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
          docker tag dockerimage  ${{ inputs.username }}/${{ inputs.dockerhubreponame }}:$SHA
 
    - name : Push to Docker HUB
+     shell: bash
      run: docker push ${{ inputs.username }}/${{ inputs.dockerhubreponame }}:$SHA
  
   
