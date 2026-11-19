@@ -35,6 +35,6 @@ steps:
          docker tag dockerimage  ${{ inputs.username }}/${{ inputs.dockerhubreponame }}:$SHA
 
    - name : Push to Docker HUB
-     run: docker push ${{ vars.DOCKERHUB_USERNAME }}/${{ inputs.dockerhubreponame }}:$SHA
+     run: docker push ${{ inputs.username }}/${{ inputs.dockerhubreponame }}:$SHA
  
   
